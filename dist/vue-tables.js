@@ -12,35 +12,33 @@
         root.VTable = VTable;
     }
 
-    function VTable() {
-
+    function VTable(args) {
+        if (args) {
+            this.create(args);  
+        }
     }
 
     VTable.prototype.create = function(args) {
-        var _tpl = [
-            '<form>',
-            'Search <input name="query" v-model="searchQuery">',
-            '</form>',
-            '<table border="1">',
-            '<thead><tr>',
-            '<th v-for="key in columns">{{key}}</th>',
-            '</tr></thead>',
-            '<tbody>',
-            '<tr v-for="item in data | filterBy searchQuery">',
-            '<td v-for="key in columns">{{item[key]}}</td>',
-            '</tr>',
-            '</tbody>',
-            '</table>'
-        ].join('');
+        var _tpl = '#tpl'
 
         var TableComponent = Vue.extend({
             template: _tpl,
             props: ['columns','data'],
-            data: {
-                searchQuery: ''
+            data: function() {
+                return tableComponnetData(args)
             }
         });
 
-        Vue.component('table-component', TableComponent);
+        Vue.component(args.component, TableComponent);
     };
+
+    function tableComponnetData(args) {
+        var _data = {};
+
+        if (_data.showSearch = args.search || false) {
+            _data.searchQuery = '';
+        }
+
+        return _data;
+    }
 })(Vue);

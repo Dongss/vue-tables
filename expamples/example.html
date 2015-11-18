@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="table-demo">
+            <table-component
+                :columns="tableColumns"
+                :data="tableData">
+            </table-component>                      
+        </div>
+    </body>
+    <script type="text/template" id="tpl">
+        <form v-if="showSearch">
+            Search: <input name="query" v-model="searchQuery">
+        </form>
+        <table border="1">
+            <thead><tr>
+                <th v-for="key in columns">{{key}}</th>
+            </tr></thead>
+            <tbody>
+                <tr v-for="item in data | filterBy searchQuery">
+                    <td v-for="key in columns">{{item[key]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+    <script src="../vue.min.js"></script>
+    <script src="../dist/vue-tables.js"></script>
+    <script src="./js/example.js"></script>
+</html>
