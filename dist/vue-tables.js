@@ -17,6 +17,25 @@
             props: ['columns','data'],
             data: function() {
                 return tableComponnetData(args)
+            },
+            computed: {
+                orderClass: function() {
+                    if (this.sortKey === '') {
+                        return "";
+                    } else if (this.sortKey !== '' && this.sortOrders === -1) {
+                        return "desc";
+                    } else if (this.sortKey !== '' && this.sortOrders === 1) {
+                        return "asc"
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            methods: {
+                sortBy: function(key) {
+                    this.$set('sortKey', key);
+                    this.$set('sortOrders', this.sortOrders * -1);
+                }
             }
         });
 
@@ -29,6 +48,14 @@
         if (_data.showSearch = args.search || false) {
             _data.searchQuery = '';
         }
+
+        var _sortOrders = {
+            'asc': 1,
+            'desc': -1
+        };
+
+        _data.sortKey = args.sortKey || '';
+        _data.sortOrders = _sortOrders[args.sortOrders] || 1;
 
         return _data;
     }

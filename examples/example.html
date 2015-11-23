@@ -1,5 +1,27 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style type="text/css">
+            .arrow {
+                width: 0;
+                height: 0;
+                vertical-align: middle;
+                display: inline-block;
+                margin-left: 4px solid transparent;
+            }
+            .arrow.asc {                              
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 8px solid cadetblue;
+                
+            }
+            .arrow.desc {
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 8px solid cadetblue;
+            }
+        </style>
+    </head>
     <body>
         <div id="table-demo">
             <table-component
@@ -14,16 +36,22 @@
         </form>
         <table border="1">
             <thead><tr>
-                <th v-for="key in columns">{{key}}</th>
+                <th v-for="col in columns"
+                    @click="sortBy($key)">
+                    {{col}}
+                    <span :class="['arrow', sortKey == $key ? orderClass : '']"></span>
+                </th>              
             </tr></thead>
             <tbody>
-                <tr v-for="item in data | filterBy searchQuery">
-                    <td v-for="key in columns">{{item[key]}}</td>
+                <tr v-for="item in data 
+                    | filterBy searchQuery
+                    | orderBy sortKey sortOrders">
+                    <td v-for="col in columns">{{item[$key]}}</td>
                 </tr>
             </tbody>
         </table>
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.min.js"></script>
+    <script src="../vue.min.js"></script>
     <script src="../dist/vue-tables.js"></script>
     <script src="./js/example.js"></script>
 </html>
