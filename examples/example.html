@@ -31,10 +31,20 @@
         </div>
     </body>
     <script type="text/template" id="tpl">
-        <form v-if="showSearch">
-            Search: <input name="query" v-model="searchQuery">
-        </form>
-        <table border="1">
+        <div style="margin-bottom:5px;">
+            <span>
+                <select name="length">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </span>
+            <span style="float:right;" v-if="showSearch">
+                Search: <input name="query" v-model="searchQuery">
+            </span>
+        </div>
+        <table border="1" style="width:100%">
             <thead><tr>
                 <th v-for="col in columns"
                     @click="sortBy($key)">
@@ -50,6 +60,20 @@
                 </tr>
             </tbody>
         </table>
+        <div style="margin-top:5px;">
+            <span style="float:left">11 to 20 of {{data.length}} total</span>
+            <span style="float:right;">
+                <button>Previous</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>Next</button>
+                <input style="width:30px;" type="text" name="lname" />
+                <button>Go</button>
+            </span>
+        </div>
     </script>
     <script src="../vue.min.js"></script>
     <script src="../dist/vue-tables.js"></script>
