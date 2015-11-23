@@ -1,17 +1,8 @@
-(function(Vue) {
-    var root = typeof self == 'object' && self.self === self && self ||
-            typeof global == 'object' && global.global === global && global ||
-            this;
-
-    if (typeof exports != 'undefined' && !exports.nodeType) {
-        if (typeof module != 'undefined' && !module.nodeType && module.exports) {
-            exports = module.exports = VTable;
-        }
-        exports.VTable = VTable;
-    } else {
-        root.VTable = VTable;
-    }
-
+(function(global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    global.VTable = factory()
+}(this, function() {
     function VTable(args) {
         if (args) {
             this.create(args);  
@@ -41,4 +32,6 @@
 
         return _data;
     }
-})(Vue);
+
+    return VTable;
+}));
