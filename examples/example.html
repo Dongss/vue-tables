@@ -32,13 +32,13 @@
     </body>
     <script type="text/template" id="tpl">
         <div style="margin-bottom:5px;">
-            <span>
-                <select name="length">
+            <span>Show
+                <select v-model="numbersPerPage">
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
-                </select>
+                </select> entries
             </span>
             <span style="float:right;" v-if="showSearch">
                 Search: <input name="query" v-model="searchQuery">
@@ -53,7 +53,7 @@
                 </th>              
             </tr></thead>
             <tbody>
-                <tr v-for="item in data 
+                <tr v-for="item in currentPageData 
                     | filterBy searchQuery
                     | orderBy sortKey sortOrders">
                     <td v-for="col in columns">{{item[$key]}}</td>
@@ -61,7 +61,7 @@
             </tbody>
         </table>
         <div style="margin-top:5px;">
-            <span style="float:left">11 to 20 of {{data.length}} total</span>
+            <span style="float:left">{{start+1}} to {{end+1}} of {{data.length}} total</span>
             <span style="float:right;">
                 <button>Previous</button>
                 <button>1</button>

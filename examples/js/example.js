@@ -1,5 +1,3 @@
-var a =Vue.extend({});
-
 var MyTable = new VTable({
     component: "table-component",
     search: true,
@@ -13,6 +11,22 @@ var columns = {
 };
 
 var data = [
+    { name: 'Dogs', age: 18 },
+    { name: 'Haha', age: 19 },
+    { name: 'ABC', age: 22 },
+    { name: 'You', age: 20 },
+    { name: 'Dogs', age: 18 },
+    { name: 'Haha', age: 19 },
+    { name: 'ABC', age: 22 },
+    { name: 'You', age: 20 },
+    { name: 'Dogs', age: 18 },
+    { name: 'Haha', age: 19 },
+    { name: 'ABC', age: 22 },
+    { name: 'You', age: 20 },
+    { name: 'Dogs', age: 18 },
+    { name: 'Haha', age: 19 },
+    { name: 'ABC', age: 22 },
+    { name: 'You', age: 20 },
     { name: 'Dogs', age: 18 },
     { name: 'Haha', age: 19 },
     { name: 'ABC', age: 22 },

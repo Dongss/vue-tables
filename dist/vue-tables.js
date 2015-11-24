@@ -10,7 +10,7 @@
     }
 
     VTable.prototype.create = function(args) {
-        var _tpl = '#tpl'
+        var _tpl = '#tpl';
 
         var TableComponent = Vue.extend({
             template: _tpl,
@@ -29,6 +29,23 @@
                     } else {
                         return "";
                     }
+                },
+                start: function() {
+                    var _start = this.data.length - (this.numbersPerPage * (this.currentPage + 1));
+                    return _start < 0 ? 0 : _start;
+                },
+                end: function() {
+                    var _end = this.start + this.numbersPerPage -1;
+                    return _end >= this.data.length ? this.data.length-1 : _end;
+                },
+                currentPageData: function() {
+                    var _data = [];
+                    for (var index in data) {
+                        if (index > this.start && index < this.end) {
+                            _data.push(data[index]);
+                        }
+                    }
+                    return _data;
                 }
             },
             methods: {
@@ -54,8 +71,13 @@
             'desc': -1
         };
 
+        // Sort
         _data.sortKey = args.sortKey || '';
         _data.sortOrders = _sortOrders[args.sortOrders] || 1;
+
+        // Pages
+        _data.numbersPerPage = 10;
+        _data.currentPage = args.currentPage || 1; 
 
         return _data;
     }
