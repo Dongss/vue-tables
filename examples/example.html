@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style type="text/css">
+        
+    </head>
+    <body>
+        <div id="table-demo">
+            <table-component
+                :columns="tableColumns"
+                :data="tableData">
+            </table-component>                      
+        </div>
+    </body>
+    <script type="text/template" id="tpl">
+    <style type="text/css">
             .arrow {
                 width: 0;
                 height: 0;
@@ -20,24 +31,19 @@
                 border-right: 4px solid transparent;
                 border-top: 8px solid cadetblue;
             }
+            .current-page-button {
+                background-color: #222222;
+                color: white;
+            }
         </style>
-    </head>
-    <body>
-        <div id="table-demo">
-            <table-component
-                :columns="tableColumns"
-                :data="tableData">
-            </table-component>                      
-        </div>
-    </body>
-    <script type="text/template" id="tpl">
         <div style="margin-bottom:5px;">
             <span>Show
                 <select v-model="numbersPerPage">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                    <option value=5>5</option>
+                    <option value=10>10</option>
+                    <option value=25>25</option>
+                    <option value=50>50</option>
+                    <option value=100>100</option>
                 </select> entries
             </span>
             <span style="float:right;" v-if="showSearch">
@@ -63,15 +69,18 @@
         <div style="margin-top:5px;">
             <span style="float:left">{{start+1}} to {{end+1}} of {{data.length}} total</span>
             <span style="float:right;">
-                <button>Previous</button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>Next</button>
-                <input style="width:30px;" type="text" name="lname" />
-                <button>Go</button>
+                <button
+                v-on:click="previousButtonClicked">Previous</button>
+                <button v-for="page in pages" 
+                :class="{'current-page-button': currentPage === page}"
+                v-on:click="pageButtonClicked(page)">
+                    {{page}}
+                </button>
+                <button
+                v-on:click="nextButtonClicked">Next</button>
+                <input style="width:30px;" type="text" v-model="pageGo" />
+                <button
+                v-on:click="goButtonClicked(pageGo)">Go</button>
             </span>
         </div>
     </script>
