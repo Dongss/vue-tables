@@ -32,6 +32,12 @@
                 background-color: #222222;
                 color: white;
             }
+            .vtable-footer {
+                margin-top:5px;
+            }
+            .vtable-footer button {
+                margin-right: 2px;
+            }
         </style>
         <div style="margin-bottom:5px;">
             <span>Show
@@ -63,7 +69,7 @@
                 </tr>
             </tbody>
         </table>
-        <div style="margin-top:5px;">
+        <div class="vtable-footer">
             <span style="float:left">{{start+1}} to {{end+1}} of {{data.length}} total</span>
             <span style="float:right;">
                 <button
