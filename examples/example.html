@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-    </head>
     <body>
         <div id="table-demo">
             <table-component
@@ -55,7 +52,7 @@
                 <th v-for="col in columns"
                     @click="sortBy($key)">
                     {{col}}
-                    <span :class="['arrow', sortKey == $key ? orderClass : '']"></span>
+                    <span :class="[myClasses.arrow, sortKey == $key ? orderClass : myClasses.noClass]"></span>
                 </th>              
             </tr></thead>
             <tbody>
@@ -72,7 +69,7 @@
                 <button
                 v-on:click="previousButtonClicked">Previous</button>
                 <button v-for="page in pages" 
-                :class="{'current-page-button': currentPage === page}"
+                :class="[currentPage === page ? myClasses.currentPageButton : myClasses.noClass]"
                 v-on:click="pageButtonClicked(page)">
                     {{page}}
                 </button>

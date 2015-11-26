@@ -8,8 +8,9 @@
     }
 
     VTable.prototype.create = function(args) {
-        var _tpl = '#tpl';
-
+        //var _tpl = '#tpl';
+        var _tpl = '<style type="text/css">.arrow{width:0;height:0;vertical-align:middle;display:inline-block;margin-left:4px solid transparent}.arrow.asc{border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:8px solid cadetblue}.arrow.desc{border-left:4px solid transparent;border-right:4px solid transparent;border-top:8px solid cadetblue}.current-page-button{background-color:#222222;color:white}</style><div style="margin-bottom:5px;"><span>Show<select v-model="numbersPerPage"><option value=5>5</option><option value=10>10</option><option value=25>25</option><option value=50>50</option><option value=100>100</option></select>entries</span><span style="float:right;"v-if="showSearch">Search:<input name="query"v-model="searchQuery"></span></div><table border="1"style="width:100%"><thead><tr><th v-for="col in columns"@click="sortBy($key)">{{col}}<span :class="[myClasses.arrow, sortKey == $key ? orderClass : myClasses.noClass]"></span></th></tr></thead><tbody><tr v-for="item in currentPageData | filterBy searchQuery | orderBy sortKey sortOrders"><td v-for="col in columns">{{item[$key]}}</td></tr></tbody></table><div style="margin-top:5px;"><span style="float:left">{{start+1}}to{{end+1}}of{{data.length}}total</span><span style="float:right;">{{myClasses.currentPageButton}}<button v-on:click="previousButtonClicked">Previous</button><button v-for="page in pages":class="[currentPage === page ? myClasses.currentPageButton : myClasses.noClass]"v-on:click="pageButtonClicked(page)">{{page}}</button><button v-on:click="nextButtonClicked">Next</button><input style="width:30px;"type="text"v-model="pageGo"/><button v-on:click="goButtonClicked(pageGo)">Go</button></span></div>'
+        
         var TableComponent = Vue.extend({
             template: _tpl,
             props: ['columns','data'],
@@ -108,7 +109,14 @@
         // Pages
         _data.numbersPerPage = args.numbersPerPage || 5;
         _data.currentPage = args.currentPage || 1;
-        _data.currentPageButtonClass = "background-color: #222222;color: white;" 
+        //_data.currentPageButtonClass = "background-color: #222222;color: white;";
+
+        _data.myClasses = {
+            noClass: '',
+            arrow: 'arrow',
+            currentPageButton: 'current-page-button',
+            currentPageButtonClass: 'current-page-button'
+        };
 
         return _data;
     }
