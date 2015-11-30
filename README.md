@@ -80,16 +80,31 @@ new Vue({
 
 * `component`  
 	type: `string`
+
 * `search`  
 	type: `bool` default: `false`
+
 * `sortKey`  
 	type: `string`
+
 * `sortOrders`  
-	type: `string` `'asc'` or `'desc'` default: `'asc'`
+	type: `string` `asc` or `desc` default: `asc`
+
 * `numbersPerPage`  
 	type: `int` default: `5`
-* `currentPage`  
-	type: 'int' default: `1`
 
+* `currentPage`  
+	type: `int` default: `1`
+
+* `myClasses` 
+
+    type: `object`  
+    styles css class name
+    * `currentPageButton`
+    type: `string`
+    * `vtableFooterButton`
+    type: `string`
+
+# Examples
 
 [Example](http://dongss.github.io/vue-tables/examples/example.html)

@@ -110,11 +110,12 @@
         _data.numbersPerPage = args.numbersPerPage || 5;
         _data.currentPage = args.currentPage || 1;
 
+        args.myClasses = args.myClasses || {};
         _data.myClasses = {
             noClass: '',
             arrow: 'arrow',
-            currentPageButton: 'current-page-button',
-            currentPageButtonClass: 'current-page-button'
+            currentPageButton: args.myClasses.currentPageButton || 'current-page-button',
+            vtableFooterButton: args.myClasses.vtableFooterButton || 'vtable-footer button'
         };
 
         return _data;
